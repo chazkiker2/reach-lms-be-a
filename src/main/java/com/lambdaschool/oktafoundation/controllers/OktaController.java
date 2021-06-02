@@ -16,12 +16,17 @@ import javax.validation.Valid;
 @RestController
 public class OktaController {
 
-	@Autowired
-	OktaSDKService okta;
+	private final OktaSDKService okta;
+	private final Client         client;
 
 	@Autowired
-	Client client;
-
+	public OktaController(
+			OktaSDKService okta,
+			Client client
+	) {
+		this.okta = okta;
+		this.client = client;
+	}
 
 	/**
 	 * Return all users in this Okta application
@@ -68,7 +73,10 @@ public class OktaController {
 	}
 
 	@GetMapping("/okta/groups_query")
-	public GroupList getGroupsQ(@RequestParam String query) {
+	public GroupList getGroupsQ(
+			@RequestParam
+					String query
+	) {
 		return client.listGroups(query, null, null);
 	}
 

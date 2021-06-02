@@ -29,14 +29,20 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class ModuleController {
 
-	@Autowired
-	ModuleRepository modulerepos;
+	private final ModuleRepository     moduleRepository;
+	private final ModuleService        moduleService;
+	private final ModuleModelAssembler moduleModelAssembler;
 
 	@Autowired
-	ModuleService moduleService;
-
-	@Autowired
-	ModuleModelAssembler moduleModelAssembler;
+	public ModuleController(
+			ModuleRepository moduleRepository,
+			ModuleService moduleService,
+			ModuleModelAssembler moduleModelAssembler
+	) {
+		this.moduleRepository     = moduleRepository;
+		this.moduleService        = moduleService;
+		this.moduleModelAssembler = moduleModelAssembler;
+	}
 
 	@GetMapping(value = "/modules", produces = "application/json")
 	public ResponseEntity<CollectionModel<EntityModel<Module>>> getAllModules() {
@@ -63,7 +69,12 @@ public class ModuleController {
 	}
 
 	@PutMapping("/modules/markdown/{moduleId}")
-	public ResponseEntity<?> replaceMarkdownByModuleId(@PathVariable Long moduleId, @RequestBody String markdown) {
+	public ResponseEntity<?> replaceMarkdownByModuleId(
+			@PathVariable
+					Long moduleId,
+			@RequestBody
+					String markdown
+	) {
 		moduleService.replaceMarkdown(moduleId, markdown);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -82,7 +93,7 @@ public class ModuleController {
 			@PathVariable
 					Long courseId
 	) {
-		List<EntityModel<Module>> allModules = modulerepos.findModulesByCourse_CourseId(courseId)
+		List<EntityModel<Module>> allModules = moduleRepository.findModulesByCourse_CourseId(courseId)
 				.stream()
 				.map(moduleModelAssembler::toModel)
 				.collect(Collectors.toList());
@@ -151,7 +162,7 @@ public class ModuleController {
 			@PathVariable
 					long moduleId
 	) {
-		modulerepos.findById(moduleId)
+		moduleRepository.findById(moduleId)
 				.orElseThrow(() -> new ResourceNotFoundException("Module with id" + moduleId + " not found."));
 		moduleService.delete(moduleId);
 

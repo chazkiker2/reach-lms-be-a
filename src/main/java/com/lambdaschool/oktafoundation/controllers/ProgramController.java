@@ -30,20 +30,26 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class ProgramController {
 
-	@Autowired
-	private TagRepository tagRepository;
+	private final TagRepository         tagRepository;
+	private final ProgramService        programService;
+	private final ProgramRepository     programRepos;
+	private final ProgramModelAssembler programModelAssembler;
+	private final TagService            tagService;
 
 	@Autowired
-	private ProgramService programService;
-
-	@Autowired
-	private ProgramRepository programRepos;
-
-	@Autowired
-	private ProgramModelAssembler programModelAssembler;
-
-	@Autowired
-	private TagService tagService;
+	public ProgramController(
+			TagRepository tagRepository,
+			ProgramService programService,
+			ProgramRepository programRepos,
+			ProgramModelAssembler programModelAssembler,
+			TagService tagService
+	) {
+		this.tagRepository         = tagRepository;
+		this.programService        = programService;
+		this.programRepos          = programRepos;
+		this.programModelAssembler = programModelAssembler;
+		this.tagService            = tagService;
+	}
 
 	@GetMapping(value = "/programs/tag-title/{tagTitle}")
 	public ResponseEntity<?> listProgramsByTag(

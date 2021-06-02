@@ -16,8 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class UploadCsvController {
 
+	private final CsvService csvService;
+
 	@Autowired
-	CsvService csvService;
+	public UploadCsvController(CsvService csvService) {
+		this.csvService = csvService;
+	}
 
 	@PostMapping("/upload/csv/course-student-roster/{courseId}")
 	public ResponseEntity<?> uploadFile(

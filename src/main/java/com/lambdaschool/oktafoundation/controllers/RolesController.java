@@ -30,8 +30,12 @@ public class RolesController {
 	/**
 	 * Using the Role service to process Role data
 	 */
+	private final RoleService roleService;
+
 	@Autowired
-	RoleService roleService;
+	public RolesController(RoleService roleService) {
+		this.roleService = roleService;
+	}
 
 	/**
 	 * List of all roles

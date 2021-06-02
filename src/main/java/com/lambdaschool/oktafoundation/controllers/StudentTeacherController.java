@@ -21,11 +21,17 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class StudentTeacherController {
 
-	@Autowired
-	StudentTeacherService studentTeacherService;
+	private final StudentTeacherService studentTeacherService;
+	private final UserModelAssembler    userModelAssembler;
 
 	@Autowired
-	UserModelAssembler userModelAssembler;
+	public StudentTeacherController(
+			StudentTeacherService studentTeacherService,
+			UserModelAssembler userModelAssembler
+	) {
+		this.studentTeacherService = studentTeacherService;
+		this.userModelAssembler    = userModelAssembler;
+	}
 
 	@GetMapping("/users/admins")
 	public ResponseEntity<CollectionModel<EntityModel<User>>> getAllAdmins() {

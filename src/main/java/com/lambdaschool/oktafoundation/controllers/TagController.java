@@ -15,8 +15,12 @@ import java.util.List;
 @RestController
 public class TagController {
 
+	private final TagService tagService;
+
 	@Autowired
-	private TagService tagService;
+	public TagController(TagService tagService) {
+		this.tagService = tagService;
+	}
 
 	@GetMapping(value = "/tags")
 	public ResponseEntity<?> getAll() {

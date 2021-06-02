@@ -30,14 +30,20 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class CourseController {
 
-	@Autowired
-	CourseRepository courserepos;
+	private final CourseRepository     courseRepository;
+	private final CourseService        courseService;
+	private final CourseModelAssembler courseModelAssembler;
 
 	@Autowired
-	CourseService courseService;
-
-	@Autowired
-	CourseModelAssembler courseModelAssembler;
+	public CourseController(
+			CourseRepository courseRepository,
+			CourseService courseService,
+			CourseModelAssembler courseModelAssembler
+	) {
+		this.courseRepository     = courseRepository;
+		this.courseService        = courseService;
+		this.courseModelAssembler = courseModelAssembler;
+	}
 
 	@GetMapping(value = "/courses", produces = {"application/json"})
 	public ResponseEntity<CollectionModel<EntityModel<Course>>> getAllCourses() {
@@ -102,7 +108,7 @@ public class CourseController {
 			@PathVariable
 					long userId
 	) {
-		List<EntityModel<Course>> courses = courserepos.findAntiCoursesByUserId(userId)
+		List<EntityModel<Course>> courses = courseRepository.findAntiCoursesByUserId(userId)
 				.stream()
 				.map(courseModelAssembler::toModel)
 				.collect(Collectors.toList());
@@ -118,11 +124,11 @@ public class CourseController {
 					long userId
 	) {
 		List<Course> enrolledCourses = new ArrayList<>();
-		courserepos.findCoursesByUserId(userId)
+		courseRepository.findCoursesByUserId(userId)
 				.iterator()
 				.forEachRemaining(enrolledCourses::add);
 		List<Course> availableCourses = new ArrayList<>();
-		courserepos.findAntiCoursesByUserId(userId)
+		courseRepository.findAntiCoursesByUserId(userId)
 				.iterator()
 				.forEachRemaining(availableCourses::add);
 		Map<String, List<Course>> mappedCourses = new HashMap<>();
@@ -136,7 +142,7 @@ public class CourseController {
 			@PathVariable
 					long userId
 	) {
-		List<EntityModel<Course>> courses = courserepos.findCoursesByUserId(userId)
+		List<EntityModel<Course>> courses = courseRepository.findCoursesByUserId(userId)
 				.stream()
 				.map(courseModelAssembler::toModel)
 				.collect(Collectors.toList());
@@ -153,7 +159,7 @@ public class CourseController {
 			@PathVariable
 					long userId
 	) {
-		List<EntityModel<Course>> courses = courserepos.findCoursesByUserId(userId)
+		List<EntityModel<Course>> courses = courseRepository.findCoursesByUserId(userId)
 				.stream()
 				.map(courseModelAssembler::toModel)
 				.collect(Collectors.toList());
@@ -179,7 +185,7 @@ public class CourseController {
 			@PathVariable
 					long programId
 	) {
-		List<EntityModel<Course>> courses = courserepos.findCoursesByProgram_ProgramId(programId)
+		List<EntityModel<Course>> courses = courseRepository.findCoursesByProgram_ProgramId(programId)
 				.stream()
 				.map(courseModelAssembler::toModel)
 				.collect(Collectors.toList());
@@ -242,7 +248,7 @@ public class CourseController {
 			@PathVariable
 					long courseId
 	) {
-		courserepos.findById(courseId)
+		courseRepository.findById(courseId)
 				.orElseThrow(() -> new CourseNotFoundException(courseId));
 		courseService.delete(courseId);
 

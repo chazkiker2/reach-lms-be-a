@@ -36,20 +36,26 @@ public class UserController {
 	/**
 	 * Using the User service to process user data
 	 */
-	@Autowired
-	private UserService userService;
+	private final UserService        userService;
+	private final UserModelAssembler userModelAssembler;
+	private final RoleService        roleService;
+	private final HelperFunctions    helperFunctions;
+	private final OktaSDKService     okta;
 
 	@Autowired
-	private UserModelAssembler userModelAssembler;
-
-	@Autowired
-	private RoleService roleService;
-
-	@Autowired
-	private HelperFunctions helperFunctions;
-
-	@Autowired
-	private OktaSDKService okta;
+	public UserController(
+			UserService userService,
+			UserModelAssembler userModelAssembler,
+			RoleService roleService,
+			HelperFunctions helperFunctions,
+			OktaSDKService okta
+	) {
+		this.userService        = userService;
+		this.userModelAssembler = userModelAssembler;
+		this.roleService        = roleService;
+		this.helperFunctions    = helperFunctions;
+		this.okta               = okta;
+	}
 
 	/**
 	 * Returns a list of all users
