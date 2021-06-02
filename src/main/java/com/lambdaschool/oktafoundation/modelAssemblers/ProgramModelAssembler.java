@@ -20,8 +20,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ProgramModelAssembler
 		implements RepresentationModelAssembler<Program, EntityModel<Program>> {
 
+	private final HelperFunctions helperFunctions;
+
 	@Autowired
-	HelperFunctions helperFunctions;
+	public ProgramModelAssembler(HelperFunctions helperFunctions) {
+		this.helperFunctions = helperFunctions;
+	}
 
 	@Override
 	public EntityModel<Program> toModel(Program program) {

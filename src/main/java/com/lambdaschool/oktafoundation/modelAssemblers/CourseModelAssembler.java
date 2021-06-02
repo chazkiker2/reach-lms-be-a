@@ -25,8 +25,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class CourseModelAssembler
 		implements RepresentationModelAssembler<Course, EntityModel<Course>> {
 
+	private final HelperFunctions helperFunctions;
+
 	@Autowired
-	private HelperFunctions helperFunctions;
+	public CourseModelAssembler(HelperFunctions helperFunctions) {
+		this.helperFunctions = helperFunctions;
+	}
 
 	/**
 	 * Creates a RepresentationModel for the given Course with useful

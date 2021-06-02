@@ -20,8 +20,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class UserModelAssembler
 		implements RepresentationModelAssembler<User, EntityModel<User>> {
 
+	private final HelperFunctions helperFunctions;
+
 	@Autowired
-	HelperFunctions helperFunctions;
+	public UserModelAssembler(HelperFunctions helperFunctions) {
+		this.helperFunctions = helperFunctions;
+	}
 
 	@Override
 	public EntityModel<User> toModel(User user) {
