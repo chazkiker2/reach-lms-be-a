@@ -3,7 +3,12 @@ package com.lambdaschool.oktafoundation.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
@@ -37,7 +42,7 @@ public class UserCourses
 			User user,
 			Course course
 	) {
-		this.user   = user;
+		this.user = user;
 		this.course = course;
 	}
 
@@ -57,7 +62,10 @@ public class UserCourses
 		this.course = course;
 	}
 
-	public boolean softEquals(User user, Course course) {
+	public boolean softEquals(
+			User user,
+			Course course
+	) {
 		return this.user.equals(user) && this.course.equals(course);
 	}
 

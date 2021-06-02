@@ -73,8 +73,7 @@ public class ModuleModelAssembler
 				moduleEntity.add(//
 						// link to POST module to the same course that this module belongs to
 						linkTo(methodOn(ModuleController.class).addNewModule(module.getCourse()
-								.getCourseId(), null)).withRel("add_module_sibling")
-				);
+								.getCourseId(), null)).withRel("add_module_sibling"));
 			} catch (Exception ignored) {}
 		}
 

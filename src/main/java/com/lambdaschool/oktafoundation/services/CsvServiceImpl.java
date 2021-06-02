@@ -1,7 +1,12 @@
 package com.lambdaschool.oktafoundation.services;
 
 
-import com.lambdaschool.oktafoundation.models.*;
+import com.lambdaschool.oktafoundation.models.Course;
+import com.lambdaschool.oktafoundation.models.Role;
+import com.lambdaschool.oktafoundation.models.RoleType;
+import com.lambdaschool.oktafoundation.models.User;
+import com.lambdaschool.oktafoundation.models.UserCourses;
+import com.lambdaschool.oktafoundation.models.UserRoles;
 import com.lambdaschool.oktafoundation.utils.CsvHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,12 @@ package com.lambdaschool.oktafoundation.services;
 
 import com.lambdaschool.oktafoundation.exceptions.ProgramNotFoundException;
 import com.lambdaschool.oktafoundation.exceptions.UserNotFoundException;
-import com.lambdaschool.oktafoundation.models.*;
+import com.lambdaschool.oktafoundation.models.Course;
+import com.lambdaschool.oktafoundation.models.Program;
+import com.lambdaschool.oktafoundation.models.ProgramIn;
+import com.lambdaschool.oktafoundation.models.ProgramTags;
+import com.lambdaschool.oktafoundation.models.Tag;
+import com.lambdaschool.oktafoundation.models.User;
 import com.lambdaschool.oktafoundation.repository.ProgramRepository;
 import com.lambdaschool.oktafoundation.repository.TagRepository;
 import com.lambdaschool.oktafoundation.repository.UserRepository;

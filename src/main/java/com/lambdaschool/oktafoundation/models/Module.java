@@ -3,7 +3,15 @@ package com.lambdaschool.oktafoundation.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -21,11 +29,11 @@ public class Module
 	@Column(nullable = false)
 	private String moduleName;
 
-	@Size(max=2000)
+	@Size(max = 2000)
 	private String moduleDescription;
 
 	@Column(nullable = false)
-	@Size(max=20000)
+	@Size(max = 20000)
 	private String moduleContent;
 
 	@ManyToOne(fetch = FetchType.EAGER)

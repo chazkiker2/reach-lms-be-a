@@ -558,7 +558,7 @@ public class User {
 	 * - TEACHER users would exist in "private Set<User> users" in Course.java 
 	 * - ADMIN users would be assigned as the `private User owner` in Course.java
 	 */
-	private Set<Course> courses = new HashSet<>();
+	private final Set<Course> courses = new HashSet<>();
 
 
 	public User() {}
@@ -592,12 +592,12 @@ public class Course {
 	 * Every 'User' that belongs to this course.
 	 * This HashSet will contain both TEACHER and STUDENT users 
 	 */
-	private Set<User> users = new HashSet<>();
+	private final Set<User> users = new HashSet<>();
 
 	/**
 	 * Every 'Module' that belongs to this course.
 	 */
-	private Set<Module> modules = new HashSet<>();
+	private final Set<Module> modules = new HashSet<>();
 
 
 	public Course() {}

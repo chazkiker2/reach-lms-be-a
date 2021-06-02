@@ -7,9 +7,21 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -26,42 +38,42 @@ public class User
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long   userId;
+	private long             userId;
 	/**
 	 * The username (String). Cannot be null and must be unique
 	 */
 	@NotNull
 	@Column(unique = true)
-	private String username;
+	private String           username;
 	//
 	@NotNull
 	@Column(unique = true)
-	private String email;
+	private String           email;
 	//
-	private String firstName;
+	private String           firstName;
 	//
-	private String   lastName;
+	private String           lastName;
 	//
-	private String   phoneNumber;
+	private String           phoneNumber;
 	//
-	private RoleType roleType;
-	//
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JsonIgnoreProperties(value = "user", allowSetters = true)
-	private Set<Program> programs = new HashSet<>();
+	private RoleType         roleType;
 	//
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnoreProperties(value = "user", allowSetters = true)
-	private Set<UserCourses> courses = new HashSet<>();
+	private Set<Program>     programs = new HashSet<>();
+	//
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnoreProperties(value = "user", allowSetters = true)
+	private Set<UserCourses> courses  = new HashSet<>();
 	/**
 	 * Part of the join relationship between user and role
 	 * connects users to the user role combination
 	 */
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnoreProperties(value = "user", allowSetters = true)
-	private Set<UserRoles> roles = new HashSet<>();
+	private Set<UserRoles>   roles    = new HashSet<>();
 
 	/**
 	 * Default constructor used primarily by the JPA.

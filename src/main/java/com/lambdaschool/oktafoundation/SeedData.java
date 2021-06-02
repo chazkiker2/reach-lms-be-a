@@ -1,10 +1,22 @@
 package com.lambdaschool.oktafoundation;
 
 
+import com.lambdaschool.oktafoundation.models.Course;
 import com.lambdaschool.oktafoundation.models.Module;
-import com.lambdaschool.oktafoundation.models.*;
+import com.lambdaschool.oktafoundation.models.Program;
+import com.lambdaschool.oktafoundation.models.Role;
+import com.lambdaschool.oktafoundation.models.RoleType;
+import com.lambdaschool.oktafoundation.models.Tag;
+import com.lambdaschool.oktafoundation.models.User;
+import com.lambdaschool.oktafoundation.models.UserCourses;
+import com.lambdaschool.oktafoundation.models.UserRoles;
 import com.lambdaschool.oktafoundation.repository.TagRepository;
-import com.lambdaschool.oktafoundation.services.*;
+import com.lambdaschool.oktafoundation.services.CourseService;
+import com.lambdaschool.oktafoundation.services.ModuleService;
+import com.lambdaschool.oktafoundation.services.ProgramService;
+import com.lambdaschool.oktafoundation.services.RoleService;
+import com.lambdaschool.oktafoundation.services.StudentTeacherService;
+import com.lambdaschool.oktafoundation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

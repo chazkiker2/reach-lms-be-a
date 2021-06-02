@@ -4,7 +4,14 @@ package com.lambdaschool.oktafoundation.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
@@ -34,7 +41,7 @@ public class Tag
 	private              Set<ProgramTags> programs         = new HashSet<>();
 	//
 	@ManyToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "course_id")
+	//	@JoinColumn(name = "course_id")
 	@JsonIgnoreProperties(value = "tags")
 	private              Set<ProgramTags> courses          = new HashSet<>();
 

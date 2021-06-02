@@ -40,4 +40,5 @@ public interface CourseService {
 	void delete(long courseId);
 
 	void deleteAll();
+
 }
